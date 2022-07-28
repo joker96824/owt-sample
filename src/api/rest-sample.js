@@ -82,12 +82,13 @@ var createToken = function (room, user, role, callback, host) {
     send('POST', '/tokens/', body, callback, host);
 };
 
-// var testFunction = function(callback, host){
-//     send('GET','/rooms', {}, function (result) {console.info('testFunction result',result)}, host)
-// }
+var allRooms = function(callback, host){
+    send('GET','/rooms', {}, callback, host)
+}
 
 export {
     mixStream,
     startStreamingIn,
-    createToken
+    createToken,
+    allRooms
 }

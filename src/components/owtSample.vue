@@ -42,7 +42,7 @@
 import { reactive, toRefs } from "vue";
 // import axios from 'axios'
 import { Conference, Base } from '../sdk/export'
-import { createToken, mixStream } from "./rest-sample"
+import { createToken, mixStream } from "../api/rest-sample"
 
 export default {
   name: 'owtSample',
