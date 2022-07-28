@@ -8,9 +8,10 @@
 /* eslint-disable */
 
 'use strict';
-var send = function (method, path, body, onRes, host = 'https://192.168.16.187:3004') {
+var send = function (method, path, body, onRes, host = 'https://192.168.16.187:33004') {
     var req = new XMLHttpRequest()
     req.onreadystatechange = function () {
+        console.log(req)
         if (req.readyState === 4) {
             onRes(req.responseText);
         }
