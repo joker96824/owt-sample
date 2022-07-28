@@ -14,7 +14,8 @@
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
     "vue-request": "^1.2.4",
-    "vue-socket.io": "^3.0.10"
+    "vue-socket.io": "^3.0.10",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
