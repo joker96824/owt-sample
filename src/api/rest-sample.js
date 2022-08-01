@@ -8,7 +8,7 @@
 /* eslint-disable */
 
 'use strict';
-var send = function (method, path, body, onRes, host = 'https://vps.wonderview.cn:33004') {
+var send = function (method, path, body, onRes, host = 'https://vps.wonderview.cn:3004') {
     var req = new XMLHttpRequest()
     req.onreadystatechange = function () {
         console.log(req)
