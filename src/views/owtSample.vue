@@ -43,11 +43,12 @@ import { reactive, toRefs } from "vue";
 // import axios from 'axios'
 import { Conference, Base } from '../sdk/export'
 import { createToken, mixStream } from "../api/rest-sample"
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'owtSample',
   props: {
-    msg: String
+    room_id: String
   },
   setup(){
     const state = reactive({
@@ -57,11 +58,15 @@ export default {
       axios_message: '',
       localStream: null,
       conference: null,
+      room_id:'',
+      route: null,
     });
 
     state.conference = new Conference.ConferenceClient()
+    state.route = useRoute()
+    state.room_id = state.route.params.room_id
 
-    createToken('', 'user', 'presenter',(response)=>{
+    createToken(state.room_id, 'user', 'presenter',(response)=>{
       state.conference.join(response).then(resp => {
           let myRoom = resp.id;
           console.log("join result:",resp)
