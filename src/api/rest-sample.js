@@ -8,7 +8,8 @@
 /* eslint-disable */
 
 'use strict';
-var send = function (method, path, body, onRes, host = 'https://vps.wonderview.cn:33004') {
+const url = 'https://192.168.16.167:3004'
+var send = function (method, path, body, onRes, host = url) {
     var req = new XMLHttpRequest()
     req.onreadystatechange = function () {
         console.log(req)
@@ -85,11 +86,21 @@ var createToken = function (room, user, role, callback, host) {
 
 var allRooms = function(callback, host){
     send('GET','/rooms', {}, callback, host)
+};
+
+var createRoom = function (name,options,callback,host){
+    send('POST','/createRoom',{name:name,options:options},callback,host)
+};
+
+var deleteRoom = function (room,callback,host){
+    send('DELETE','/rooms/'+room,callback,host)
 }
 
 export {
     mixStream,
     startStreamingIn,
     createToken,
-    allRooms
+    allRooms,
+    createRoom,
+    deleteRoom
 }

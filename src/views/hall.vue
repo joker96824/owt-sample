@@ -1,10 +1,15 @@
 <template>
+  <Button @click="addNewRoom()">new room</Button>
+  <Button @click="deleteRoom('62feff0ef05f6c30b01cf302')">Delete</Button>
   <div class="room-box">
     <div class="room-box-item"
     v-for="(room,index) in room_info"
     :key="index"
     @click="joinRoom(room._id)"
-  >{{room._id}},{{room.name}}</div>
+  >
+    {{room._id}},{{room.name}}
+    
+  </div>
   </div>
   
   <!-- <testPage v-show="true"/> -->
@@ -12,8 +17,9 @@
 
 <script>
 // import testPage from '../../components/testPage.vue'
-import { allRooms } from "../api/rest-sample"
+import { allRooms,createRoom,deleteRoom } from "../api/rest-sample"
 import { useRouter } from 'vue-router'
+import { Button } from 'ant-design-vue';
 
 export default {
   // eslint-disable-next-line
@@ -25,7 +31,7 @@ export default {
     }
   },
   components: {
-    // testPage,
+    Button,
   },
   created() {
     allRooms((response)=>{
@@ -39,6 +45,16 @@ export default {
         params: {
           room_id: room_id
         }
+      })
+    },
+    addNewRoom(){
+      createRoom('test',{},(response)=>{
+        console.log(response)
+      })
+    },
+    deleteRoom(room_id) {
+      deleteRoom(room_id,(response)=>{
+        console.log(response)
       })
     }
   }
