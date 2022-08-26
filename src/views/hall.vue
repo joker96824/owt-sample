@@ -1,13 +1,14 @@
 <template>
   <Button @click="addNewRoom()">new room</Button>
-  <Button @click="deleteRoom('62feff0ef05f6c30b01cf302')">Delete</Button>
   <div class="room-box">
     <div class="room-box-item"
     v-for="(room,index) in room_info"
     :key="index"
-    @click="joinRoom(room._id)"
   >
-    {{room._id}},{{room.name}}
+    <div @click="joinRoom(room._id)">
+      {{room._id}},{{room.name}}
+    </div>
+    <Button @click="removeRoom(room._id)">Delete</Button>
     
   </div>
   </div>
@@ -17,6 +18,7 @@
 
 <script>
 // import testPage from '../../components/testPage.vue'
+// import { reactive, toRefs } from "vue";
 import { allRooms,createRoom,deleteRoom } from "../api/rest-sample"
 import { useRouter } from 'vue-router'
 import { Button } from 'ant-design-vue';
@@ -24,6 +26,23 @@ import { Button } from 'ant-design-vue';
 export default {
   // eslint-disable-next-line
   name: 'Hall',
+  // setup() {
+  //   const state = reactive({
+  //     room_info: []
+  //   });
+
+  //   const getAllRoom = function() {
+  //     allRooms((response)=>{
+  //       console.log(JSON.parse(response))
+  //       state.room_info = JSON.parse(response)
+  //     })
+  //   }
+
+  //   return {
+  //     ...toRefs(state),
+  //     getAllRoom
+  //   }
+  // },
   data() {
     return {
       room_info: null,
@@ -39,6 +58,11 @@ export default {
     })
   },
   methods:{
+    getAllRoom() {
+      allRooms((response)=>{
+        this.room_info = JSON.parse(response)
+      })
+    },
     joinRoom(room_id) {
       this.route.push({
         name: 'owtSample',
@@ -47,15 +71,27 @@ export default {
         }
       })
     },
-    addNewRoom(){
-      createRoom('test',{},(response)=>{
-        console.log(response)
-      })
+    async addNewRoom(){
+      await new Promise((resolve,reject) => {
+        createRoom('test',{},(response)=>{
+          resolve(response)
+          reject(response)
+        })
+      }).then()
+      .catch(err => {console.log(err)})
+      this.getAllRoom()
     },
-    deleteRoom(room_id) {
-      deleteRoom(room_id,(response)=>{
-        console.log(response)
-      })
+
+    async removeRoom(room_id) {
+      await new Promise((resolve,reject) => {
+        deleteRoom(room_id,(response)=>{
+          resolve(response)
+          reject(response)
+        })
+      }).then()
+      .catch(err => {console.log(err)})
+
+      this.getAllRoom()
     }
   }
 }

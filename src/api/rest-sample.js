@@ -12,7 +12,7 @@ const url = 'https://192.168.16.167:3004'
 var send = function (method, path, body, onRes, host = url) {
     var req = new XMLHttpRequest()
     req.onreadystatechange = function () {
-        console.log(req)
+        // console.log(req)
         if (req.readyState === 4) {
             onRes(req.responseText);
         }
@@ -93,7 +93,7 @@ var createRoom = function (name,options,callback,host){
 };
 
 var deleteRoom = function (room,callback,host){
-    send('DELETE','/rooms/'+room,callback,host)
+    send('DELETE','/rooms/'+room,{},callback,host)
 }
 
 export {
