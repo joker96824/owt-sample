@@ -8,7 +8,7 @@
 /* eslint-disable */
 
 'use strict';
-const url = 'https://192.168.16.167:3004'
+const url = 'https://vps.wonderview.cn:3004'
 var send = function (method, path, body, onRes, host = url) {
     var req = new XMLHttpRequest()
     req.onreadystatechange = function () {

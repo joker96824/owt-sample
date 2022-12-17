@@ -50,7 +50,7 @@ export class AudioTrackConstraints {
  */
 export class VideoTrackConstraints {
   // eslint-disable-next-line require-jsdoc
-  constructor(source) {
+  constructor(source, deviceID='1') {
     if (!Object.values(MediaFormatModule.VideoSourceInfo)
       .some((v) => v === source)) {
       throw new TypeError('Invalid source.');
@@ -69,8 +69,11 @@ export class VideoTrackConstraints {
      * @instance
      * @see https://w3c.github.io/mediacapture-main/#def-constraint-deviceId
      */
-
+    
     this.deviceId = undefined;
+    if(deviceID != '1'){
+      this.deviceId = deviceID
+    }
 
     /**
      * @member {Owt.Base.Resolution} resolution
